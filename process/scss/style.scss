@@ -1,0 +1,294 @@
+/*----------------------
+  TABLE OF CSS CONTENT
+------------------------
+  [*] Reset
+  [1] Variables
+  [2] Global style
+  [3] Container
+  [*] Media query
+*/
+
+/* ------------------
+[*] Reset
+-------------------*/
+@import url('reset.css');
+
+/* ------------------
+[1] Variables
+-------------------*/
+
+
+/* ------------------
+[1] Global style
+-------------------*/
+
+body{
+  background-color: #615b5b;
+  position: relative;
+  height: 100vh;
+}
+
+.game-container {
+  display: flex;
+  background-color: #fff;
+  min-height: 150px;
+  max-width: 500px;
+  justify-content: space-between;
+  padding: 10px;
+  border: #ea7928 2px solid;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  box-shadow: 0 0 200px 0 #000000;
+
+  &:before {
+    content: "";
+    background: #f5f5f3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    display: block;
+    height: 100%;
+    z-index: -1;
+    border-right: solid 1px #ecece9;
+  }
+}
+
+.player-name {
+  font-size: 19px;
+  text-transform: uppercase;
+  color: #abc3cc;
+  margin: 0 auto;
+  position: relative;
+  &:before {
+    content: "";
+    width: 0;
+    background: #37ce54;
+    height: 3px;
+    position: absolute;
+    bottom: -6px;
+    transition: width .3s;
+  }
+  &.isActive{
+    color: #19a1ce;
+    &:before {
+      width: 100%;
+    }
+  }
+}
+
+.player-container,
+.game-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  text-align: center;
+}
+
+.game-panel {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  width: max-content;
+}
+
+.dice-container {
+  margin: 30px auto;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.roll {
+  margin-bottom: 10px;
+}
+
+.roll, .hold {
+  cursor: pointer;
+}
+
+/* ------------------
+[3] 3d dice
+-------------------*/
+
+.dice {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  transform: rotateX(180deg) rotateY(10deg) rotateX(-10deg);
+
+  > div {
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    background: #35ab44;
+    box-shadow: inset 0 0 15px 2px #1d883e;
+    border: solid 1px #35ab44;
+    border-radius: 4px;
+  }
+
+  span {
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+  }
+
+  // one
+  .one {
+    transform: rotateX(180deg) translateZ(30px);
+    span {
+      top: 26px;
+      left: 26px;
+    }
+  }
+  // two
+  .two {
+    transform: rotateY(-90deg) translateZ(30px);
+    span {
+      &:nth-child(1) {
+        top: 12px;
+        right: 12px;
+      }
+      &:nth-child(2) {
+        bottom: 12px;
+        left: 12px;
+      }
+    }
+  }
+  // three
+  .three {
+    transform: rotateX(90deg) translateZ(30px);
+    span {
+      &:nth-child(1) {
+        top: 12px;
+        right: 12px;
+      }
+      &:nth-child(2) {
+        bottom: 12px;
+        left: 12px;
+      }
+      &:nth-child(3) {
+        bottom: 26px;
+        left: 26px;
+      }
+    }
+  }
+  // four
+  .four {
+    transform: rotateX(-90deg) translateZ(30px);
+    span {
+      &:nth-child(1) {
+        top: 12px;
+        right: 12px;
+      }
+      &:nth-child(2) {
+        top: 12px;
+        left: 12px;
+      }
+      &:nth-child(3) {
+        bottom: 12px;
+        left: 12px;
+      }
+      &:nth-child(4) {
+        bottom: 12px;
+        right: 12px;
+      }
+    }
+  }
+  // five
+  .five {
+    transform: rotateY(90deg) translateZ(30px);
+    span {
+      &:nth-child(1) {
+        top: 12px;
+        left: 12px;
+      }
+      &:nth-child(2) {
+        top: 12px;
+        right: 12px;
+      }
+      &:nth-child(3) {
+        top: 26px;
+        left: 26px;
+      }
+      &:nth-child(4) {
+        bottom: 12px;
+        left: 12px;
+      }
+      &:nth-child(5) {
+        bottom: 12px;
+        right: 12px;
+      }
+    }
+  }
+  // six
+  .six {
+    transform: rotateY(0deg) translateZ(30px);
+    span {
+      &:nth-child(1) {
+        top: 10px;
+        left: 12px;
+      }
+      &:nth-child(2) {
+        top: 10px;
+        right: 12px;
+      }
+      &:nth-child(3) {
+        top: 26px;
+        left: 12px;
+      }
+      &:nth-child(4) {
+        top: 26px;
+        right: 12px;
+      }
+      &:nth-child(5) {
+        bottom: 10px;
+        left: 12px;
+      }
+      &:nth-child(6) {
+        bottom: 10px;
+        right: 12px;
+      }
+    }
+  }
+}
+
+.two { transform: rotateY(460deg) rotateX(180deg) translateZ(0px); }
+.three { transform: rotateY(350deg) rotateX(-443deg) translateZ(0px); }
+.four { transform: rotateY(725deg) rotateX(80deg) translateZ(0px); }
+.five { transform: rotateY(-460deg) rotateX(450deg) translateZ(0px); }
+.six { transform: rotateY(10deg) rotateX(710deg) translateZ(0px); }
+
+/*@keyframes opacity {
+  0% { opacity: 1; }
+  20% { opacity: .5; }
+  40% { opacity: 1; }
+  60% { opacity: 1; }
+  80% { opacity: .5; }
+  100% { opacity: 1; }
+}*/
+
+/*@keyframes rotate {
+  0% { transform: rotateX(90deg) rotateY(360deg) rotateZ(0deg) translateX(0); } v
+  35% { transform: rotateX(-180deg) rotateY(-90deg) rotateZ(0deg) translateX(0); } v
+  45% { transform: rotateX(-180deg) rotateY(-90deg) rotateZ(0deg) translateX(0); }
+  65% { transform: rotateX(0deg) rotateY(0deg) rotateZ(-360deg) translateX(0); }
+  75% { transform: rotateX(0deg) rotateY(0deg) rotateZ(-360deg) translateX(0); }
+  100% { transform: rotateX(90deg) rotateY(360deg) rotateZ(0deg) translateX(0); }
+}*/
+
+/* ------------------
+[*] Media query
+-------------------*/
